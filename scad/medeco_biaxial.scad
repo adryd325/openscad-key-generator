@@ -2,8 +2,8 @@ use <keygen.scad>
 include <medeco.scad>
 
 module medeco_biaxial(bitting="",
-                      outline_name="1515",
-                      warding_name="1515") {
+                      outline_name="1517",
+                      warding_name="1517") {
 
     name = "Medeco Biaxial";
 
@@ -36,7 +36,8 @@ module medeco_biaxial(bitting="",
                   "1543",
                   "1638",
                   "1644",
-                  "1655"];
+                  "1655",
+                  "m3_eagle_??"];
 
     outline_param = key_lkup(outlines_k, outlines_v, outline_name);
     outline_points = outline_param[0];
@@ -49,6 +50,7 @@ module medeco_biaxial(bitting="",
     
     cut_locations = [for(i=[0.244, 0.414, 0.584, 0.754, 0.924, 1.094]) i*25.4];
     depth_table = [for(i=[0.272+0.025:-0.025:0.141]) i*25.4];
+
     angles_k = ["K", "B", "Q", "M", "D", "S"];
     angles_v = [[20, -.7874], [0, -.7874], [-20, -.7874],
                 [20, .7874],  [0, .7874],  [-20, .7874]];
@@ -69,7 +71,7 @@ module medeco_biaxial(bitting="",
                       engrave_right_paths=engrave_paths,
                       engrave_left_points=engrave_points,
                       engrave_left_paths=engrave_paths,
-                      offset=offset,
+                      offset=offset,    
                       plug_diameter=12.7);
         } else {
             children(0);
@@ -77,11 +79,27 @@ module medeco_biaxial(bitting="",
         key_bitting(heights, cut_locations + offsets,
                     flat=.381, angle=86, // from CW-1012 cutter specs
                     angles=angles);
+        
+        if (m3) {
+        // TODO: this will vary from blank to blank. 6 possible depths
+        m3_master_depth=7.16;
+        m3_service_depth=13.818;
+        translate([0,(0-m3_service_depth)-1.65,1.8]) 
+            rotate([0,-90,0]) 
+                cylinder(h=2, r=0.65, $fn=15);
+        translate([-2,(0-m3_service_depth)-101,0])
+            cube([2,100,1.8]);
+        translate([-2.1,(0-m3_master_depth)-101,0])
+            cube([1.3,100,1.8]);
+        }
     }
+
+
 }
 
 // Defaults
-bitting="";
-outline="1515";
-warding="1515";
+bitting="2K5B3Q6M3S6M";
+m3=true;
+outline="A1638";
+warding="m3_eagle_??";
 medeco_biaxial(bitting, outline, warding);
