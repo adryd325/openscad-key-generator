@@ -17,6 +17,10 @@ parser.add_argument("-w", "--warding", dest='warding',
                     help="Key warding")
 parser.add_argument("-o", "--output", dest='output', default="a.stl",
                     help="Output file (defaults to a.stl)")
+parser.add_argument("-m", "--service-depth", dest='m3_service_depth',
+                    help="Medeco M3 Only: Set depth of service sidebar")
+parser.add_argument("-M", "--master-depth", dest='m3_master_depth',
+                    help="Medeco M3 Only: Set depth of master sidebar")
 
 (args, remaining) = parser.parse_known_args()
 
