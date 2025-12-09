@@ -45,6 +45,9 @@ import cspsubdiv
 import bezmisc
 import re
 
+xrange=range
+
+
 DEFAULT_WIDTH = 100
 DEFAULT_HEIGHT = 100
 
