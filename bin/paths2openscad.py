@@ -44,6 +44,7 @@ import cubicsuperpath
 import cspsubdiv
 import bezmisc
 import re
+xrange=range
 
 DEFAULT_WIDTH = 100
 DEFAULT_HEIGHT = 100
@@ -90,7 +91,7 @@ def pointInBBox( pt, bbox ):
 def bboxInBBox( bbox1, bbox2 ):
 
     '''
-    Determine if the bounding box bbox1 lies on or within the
+/    Determine if the bounding box bbox1 lies on or within the
     bounding box bbox2.  NOTE: we do not test for strict enclosure.
 
     Structure of the bounding boxes is
